@@ -1,5 +1,6 @@
 import React from 'react';
-import Chat from './Chat';
+
+import Chat from './screens/Chat';
 
 const App = () => (
   <Chat />

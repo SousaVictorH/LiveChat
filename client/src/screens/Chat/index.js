@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
 import { v4 as uuid } from 'uuid';
 
-const myId = uuid();
+import socket from '../../services/socketIo';
 
-const socket = io('http://localhost:8080')
-socket.on('connect', () => console.log('[IO] Connection has been established'))
+import {
+    Container,
+    Form,
+    List,
+    ListItem,
+    Message
+} from './styles';
+
+import Input from '../../components/Input';
+
+const myId = uuid();
 
 const Chat = () => {
     const [message, setMessage] = useState('');
@@ -18,7 +26,7 @@ const Chat = () => {
         if (message.trim()) {
             socket.emit('chat.message', {
                 id: myId,
-                message: message
+                message: message.trim()
             });
 
             setMessage('');
@@ -35,32 +43,31 @@ const Chat = () => {
         return () => socket.off('chat.message', handleNewMessage);
     }, [messages]);
 
-    return (
-        <main className="container">
-            <ul className="list">
+    return(
+        <Container>
+            <List>
                 {
                     messages.map((item, index) => {
                         const flag = item.id === myId ? 'mine' : 'other';
 
                         return (
-                            <li className={`list__item list__item--${flag}`} key={index}>
-                                <span className={`message message--${flag}`}>
+                            <ListItem className={`${flag}`} key={index}>
+                                <Message className={`${flag}`}>
                                     {item.message}
-                                </span>
-                            </li>
+                                </Message>
+                            </ListItem>
                         );
                     })
                 }
-            </ul>
-            <form className="form" onSubmit={handleSubmit}>
-                <input    
-                    className="form__field"
+            </List>
+            <Form onSubmit={handleSubmit}>
+                <Input 
                     placeholder="Type a new message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                 />
-            </form>
-        </main>
+            </Form>
+        </Container>
     );
 };
 
