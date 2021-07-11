@@ -21,9 +21,9 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
-        console.log('[IO] A connection was disconnected');
+        console.log('[IO] A connection was been lost');
     });
-})
+});
 
 server.listen(SERVER_PORT, SERVER_HOST, () => {
     console.log("Server Active in port " + SERVER_PORT);
