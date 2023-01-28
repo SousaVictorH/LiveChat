@@ -9,7 +9,7 @@ This project is a real-time chat application carried out locally, where several 
   
 <div>
   <h3>Default Page</h3>
-  <img src="https://github.com/SousaVictorH/RecDiscord/blob/master/public/videos/discord.gif" alt="Default">
+  <img src="https://github.com/SousaVictorH/LiveChat/blob/master/videos/video.gif" alt="Default">
 </div>
 
 ###  :hammer: Made with
